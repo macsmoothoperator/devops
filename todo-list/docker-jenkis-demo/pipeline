@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking Out....'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker Image...'
+                sh 'docker build -t jenkis-demo'
+            }
+        }
+        
+        stage('Run Docker Container') {
+            steps {
+                echo 'Running Docker Container'
+                sh 'docker stop jenkins-demo || true'
+                sh 'docker rm jenkins-demo || true'
+                // Run on port 8081
+                sh 'docker run -d -p 8081:80 --name jenkins-demo jenkins-docker-demo'
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                echo 'Checking running containers...'
+                sh 'docker ps'
+            }
+        }
+        
+        
+    }
+}
