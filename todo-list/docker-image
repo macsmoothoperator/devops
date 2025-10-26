@@ -1,0 +1,6 @@
+5) Push Docker Image to Docker Hub
+1. Login to Docker Hub using: docker login
+2. Tag your image: docker tag ise-static-web username/ise-static-web:v1
+3. Push image: docker push username/ise-static-web:v1
+4. Verify image availability on Docker Hub.
+5. Submit Docker Hub link and screenshot of successful push.
